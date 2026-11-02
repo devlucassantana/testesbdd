@@ -12,7 +12,7 @@ from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, PageBreak,
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))      # bdd-tests/
 PR = os.path.join(ROOT, "docs", "prints")
 PRINTS = [
-    ("01-execucao-local-console.png", "Execução local: console do mvn test com o resumo de cenários e passos"),
+    ("01-execucao-local-console.png", "Saída do console dos testes BDD (log do passo no GitHub Actions)"),
     ("02-relatorio-html-cucumber.png", "Relatório HTML do Cucumber (target/cucumber-report/cucumber.html)"),
     ("03-pipeline-bdd-actions.png", "GitHub Actions: job Deploy - Staging com o passo de testes BDD verde"),
     ("04-resumo-bdd-no-job.png", "GitHub Actions: resumo do job com o total de cenários executados"),
