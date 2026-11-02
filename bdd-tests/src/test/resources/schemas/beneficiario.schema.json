@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Beneficiario",
+  "type": "object",
+  "required": [
+    "idBeneficiario",
+    "nome",
+    "cpf"
+  ],
+  "properties": {
+    "idBeneficiario": {
+      "type": "integer"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cpf": {
+      "type": "string",
+      "maxLength": 14
+    },
+    "perfil": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "regiao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dataCadastro": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

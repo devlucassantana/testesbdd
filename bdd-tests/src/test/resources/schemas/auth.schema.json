@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resposta de login",
+  "type": "object",
+  "required": [
+    "token",
+    "tipo",
+    "email",
+    "perfil"
+  ],
+  "properties": {
+    "token": {
+      "type": "string",
+      "minLength": 20
+    },
+    "tipo": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "perfil": {
+      "type": "string",
+      "enum": [
+        "ADMIN",
+        "GESTOR",
+        "USER"
+      ]
+    }
+  }
+}

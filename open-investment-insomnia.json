@@ -1,0 +1,461 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-05-23T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v9",
+  "resources": [
+
+    {
+      "_id": "wrk_openinvest",
+      "_type": "workspace",
+      "name": "Open Investment — ESG API",
+      "description": "FIAP 2TDSOC | Lucas Gabriel Neres Sant'Ana | RM 565612"
+    },
+
+    {
+      "_id": "env_openinvest",
+      "_type": "environment",
+      "parentId": "wrk_openinvest",
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "token": ""
+      }
+    },
+
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "🔐 Autenticação"
+    },
+    {
+      "_id": "req_login_admin",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login Admin",
+      "method": "POST",
+      "url": "{{ base_url }}/api/auth/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@openinvestment.com\",\n  \"senha\": \"Admin@123\"\n}"
+      },
+      "description": "Retorna JWT. Copie o campo 'token' e cole na variável de ambiente 'token'."
+    },
+    {
+      "_id": "req_login_gestor",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login Gestor",
+      "method": "POST",
+      "url": "{{ base_url }}/api/auth/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"gestor@openinvestment.com\",\n  \"senha\": \"Gestor@123\"\n}"
+      }
+    },
+
+    {
+      "_id": "fld_projetos",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "📋 Projetos Sociais"
+    },
+    {
+      "_id": "req_projetos_get_all",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "GET — Listar todos os projetos",
+      "method": "GET",
+      "url": "{{ base_url }}/api/projetos",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_projetos_get_status",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "GET — Filtrar por status (PLANEJADO)",
+      "method": "GET",
+      "url": "{{ base_url }}/api/projetos?status=PLANEJADO",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_projetos_get_critico",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "GET — Orçamento crítico (≥80%)",
+      "method": "GET",
+      "url": "{{ base_url }}/api/projetos/orcamento-critico",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_projetos_get_id",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "GET — Buscar por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/api/projetos/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_projetos_post",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "POST — Criar projeto",
+      "method": "POST",
+      "url": "{{ base_url }}/api/projetos",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nomeProjeto\": \"Letramento Financeiro Periférico\",\n  \"descricao\": \"Educação financeira para comunidades de baixa renda via Open Finance\",\n  \"odsVinculacao\": \"ODS 1 - Erradicação da Pobreza\",\n  \"dataInicio\": \"2026-06-01\",\n  \"dataFimPrev\": \"2026-12-31\",\n  \"orcamentoTotal\": 120000.00\n}"
+      }
+    },
+    {
+      "_id": "req_projetos_put",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "PUT — Atualizar projeto",
+      "method": "PUT",
+      "url": "{{ base_url }}/api/projetos/1",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nomeProjeto\": \"Capacitação Digital Periferia — Atualizado\",\n  \"descricao\": \"Cursos de informática, programação e Open Finance para jovens de baixa renda\",\n  \"odsVinculacao\": \"ODS 4 - Educação de Qualidade\",\n  \"dataInicio\": \"2026-01-01\",\n  \"dataFimPrev\": \"2026-12-31\",\n  \"orcamentoTotal\": 180000.00\n}"
+      }
+    },
+    {
+      "_id": "req_projetos_patch_status",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "PATCH — Atualizar status",
+      "method": "PATCH",
+      "url": "{{ base_url }}/api/projetos/1/status?status=EM_ANDAMENTO",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_projetos_delete",
+      "_type": "request",
+      "parentId": "fld_projetos",
+      "name": "DELETE — Excluir projeto (ADMIN)",
+      "method": "DELETE",
+      "url": "{{ base_url }}/api/projetos/3",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+
+    {
+      "_id": "fld_alocacoes",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "💰 Alocação de Recursos"
+    },
+    {
+      "_id": "req_aloc_get",
+      "_type": "request",
+      "parentId": "fld_alocacoes",
+      "name": "GET — Alocações do projeto 1",
+      "method": "GET",
+      "url": "{{ base_url }}/api/alocacoes/projeto/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_aloc_post",
+      "_type": "request",
+      "parentId": "fld_alocacoes",
+      "name": "POST — Criar alocação (valida orçamento)",
+      "method": "POST",
+      "url": "{{ base_url }}/api/alocacoes",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"idProjeto\": 1,\n  \"descricao\": \"Compra de notebooks para o lab\",\n  \"valor\": 45000.00,\n  \"tipoRecurso\": \"MATERIAL\",\n  \"dataAlocacao\": \"2026-06-01\"\n}"
+      }
+    },
+    {
+      "_id": "req_aloc_post_bloqueia",
+      "_type": "request",
+      "parentId": "fld_alocacoes",
+      "name": "POST — [422] Alocação bloqueada (orçamento estourado)",
+      "method": "POST",
+      "url": "{{ base_url }}/api/alocacoes",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"idProjeto\": 1,\n  \"descricao\": \"Valor acima do orçamento\",\n  \"valor\": 999999.00,\n  \"tipoRecurso\": \"FINANCEIRO\"\n}"
+      }
+    },
+    {
+      "_id": "req_aloc_delete",
+      "_type": "request",
+      "parentId": "fld_alocacoes",
+      "name": "DELETE — Excluir alocação",
+      "method": "DELETE",
+      "url": "{{ base_url }}/api/alocacoes/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+
+    {
+      "_id": "fld_beneficiarios",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "👥 Beneficiários"
+    },
+    {
+      "_id": "req_benef_get_all",
+      "_type": "request",
+      "parentId": "fld_beneficiarios",
+      "name": "GET — Listar beneficiários",
+      "method": "GET",
+      "url": "{{ base_url }}/api/beneficiarios",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_benef_get_id",
+      "_type": "request",
+      "parentId": "fld_beneficiarios",
+      "name": "GET — Buscar por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/api/beneficiarios/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_benef_post",
+      "_type": "request",
+      "parentId": "fld_beneficiarios",
+      "name": "POST — Cadastrar beneficiário",
+      "method": "POST",
+      "url": "{{ base_url }}/api/beneficiarios",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Pedro Alves\",\n  \"cpf\": \"444.555.666-77\",\n  \"perfil\": \"Jovem 18-25\",\n  \"regiao\": \"Zona Oeste - SP\"\n}"
+      }
+    },
+    {
+      "_id": "req_benef_put",
+      "_type": "request",
+      "parentId": "fld_beneficiarios",
+      "name": "PUT — Atualizar beneficiário",
+      "method": "PUT",
+      "url": "{{ base_url }}/api/beneficiarios/1",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Maria Silva Atualizada\",\n  \"cpf\": \"111.222.333-44\",\n  \"perfil\": \"Adulto 26-45\",\n  \"regiao\": \"Zona Leste - SP\"\n}"
+      }
+    },
+    {
+      "_id": "req_benef_delete",
+      "_type": "request",
+      "parentId": "fld_beneficiarios",
+      "name": "DELETE — Excluir beneficiário",
+      "method": "DELETE",
+      "url": "{{ base_url }}/api/beneficiarios/3",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+
+    {
+      "_id": "fld_impactos",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "🌱 Impacto Social"
+    },
+    {
+      "_id": "req_imp_get",
+      "_type": "request",
+      "parentId": "fld_impactos",
+      "name": "GET — Impactos do projeto 1",
+      "method": "GET",
+      "url": "{{ base_url }}/api/impactos/projeto/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_imp_count",
+      "_type": "request",
+      "parentId": "fld_impactos",
+      "name": "GET — Contagem de impactos do projeto 1",
+      "method": "GET",
+      "url": "{{ base_url }}/api/impactos/projeto/1/contagem",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_imp_post",
+      "_type": "request",
+      "parentId": "fld_impactos",
+      "name": "POST — Registrar impacto (inicia projeto automaticamente)",
+      "method": "POST",
+      "url": "{{ base_url }}/api/impactos",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"idProjeto\": 1,\n  \"idBeneficiario\": 1,\n  \"tipoImpacto\": \"CAPACITACAO\",\n  \"descricao\": \"Conclusão do módulo de lógica de programação — 40h\"\n}"
+      }
+    },
+
+    {
+      "_id": "fld_voluntarios",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "🤝 Voluntários"
+    },
+    {
+      "_id": "req_vol_get_all",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "GET — Listar voluntários",
+      "method": "GET",
+      "url": "{{ base_url }}/api/voluntarios",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_vol_get_id",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "GET — Buscar por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/api/voluntarios/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_vol_post",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "POST — Cadastrar voluntário",
+      "method": "POST",
+      "url": "{{ base_url }}/api/voluntarios",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Fernanda Lima\",\n  \"cpf\": \"321.654.987-00\",\n  \"email\": \"fernanda@voluntario.com\",\n  \"especialidade\": \"Finanças e Open Banking\"\n}"
+      }
+    },
+    {
+      "_id": "req_vol_put",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "PUT — Atualizar voluntário",
+      "method": "PUT",
+      "url": "{{ base_url }}/api/voluntarios/1",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ token }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Carlos Mendes Atualizado\",\n  \"cpf\": \"123.456.789-00\",\n  \"email\": \"carlos.mendes@voluntario.com\",\n  \"especialidade\": \"TI e Open Finance\"\n}"
+      }
+    },
+    {
+      "_id": "req_vol_inativar",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "PATCH — Inativar voluntário",
+      "method": "PATCH",
+      "url": "{{ base_url }}/api/voluntarios/2/inativar",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_vol_vincular",
+      "_type": "request",
+      "parentId": "fld_voluntarios",
+      "name": "POST — Vincular ao projeto (gera log + alerta ESG)",
+      "method": "POST",
+      "url": "{{ base_url }}/api/voluntarios/1/vincular-projeto/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+
+    {
+      "_id": "fld_alertas",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "🚨 Alertas ESG (ADMIN/GESTOR)"
+    },
+    {
+      "_id": "req_alert_pendentes",
+      "_type": "request",
+      "parentId": "fld_alertas",
+      "name": "GET — Alertas pendentes",
+      "method": "GET",
+      "url": "{{ base_url }}/api/alertas/pendentes",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_alert_projeto",
+      "_type": "request",
+      "parentId": "fld_alertas",
+      "name": "GET — Alertas do projeto 1",
+      "method": "GET",
+      "url": "{{ base_url }}/api/alertas/projeto/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_alert_ler",
+      "_type": "request",
+      "parentId": "fld_alertas",
+      "name": "PATCH — Marcar alerta como lido",
+      "method": "PATCH",
+      "url": "{{ base_url }}/api/alertas/1/ler",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_alert_resolver",
+      "_type": "request",
+      "parentId": "fld_alertas",
+      "name": "PATCH — Marcar alerta como resolvido",
+      "method": "PATCH",
+      "url": "{{ base_url }}/api/alertas/1/resolver",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+
+    {
+      "_id": "fld_logs",
+      "_type": "request_group",
+      "parentId": "wrk_openinvest",
+      "name": "📝 Log de Auditoria (ADMIN)"
+    },
+    {
+      "_id": "req_log_all",
+      "_type": "request",
+      "parentId": "fld_logs",
+      "name": "GET — Todos os logs (paginado)",
+      "method": "GET",
+      "url": "{{ base_url }}/api/logs?page=0&size=20",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    },
+    {
+      "_id": "req_log_tabela",
+      "_type": "request",
+      "parentId": "fld_logs",
+      "name": "GET — Logs filtrados por tabela",
+      "method": "GET",
+      "url": "{{ base_url }}/api/logs/tabela/projeto_social",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ token }}" }]
+    }
+
+  ]
+}

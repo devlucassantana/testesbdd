@@ -1,0 +1,21 @@
+# Maven
+target/
+*.jar
+*.war
+
+# Ambiente — NUNCA commitar
+.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Projeto social",
+  "type": "object",
+  "required": [
+    "idProjeto",
+    "nomeProjeto",
+    "orcamentoTotal",
+    "verbaUtilizada",
+    "saldoDisponivel",
+    "statusProjeto"
+  ],
+  "properties": {
+    "idProjeto": {
+      "type": "integer"
+    },
+    "nomeProjeto": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "odsVinculacao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dataInicio": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dataFimPrev": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "orcamentoTotal": {
+      "type": "number"
+    },
+    "verbaUtilizada": {
+      "type": "number"
+    },
+    "saldoDisponivel": {
+      "type": "number"
+    },
+    "percentualUtilizado": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "statusProjeto": {
+      "type": "string",
+      "enum": [
+        "PLANEJADO",
+        "EM_ANDAMENTO",
+        "CONCLUIDO",
+        "CANCELADO"
+      ]
+    },
+    "criadoEm": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

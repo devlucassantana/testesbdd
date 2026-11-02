@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Impacto social",
+  "type": "object",
+  "required": [
+    "idImpacto",
+    "projeto",
+    "beneficiario",
+    "tipoImpacto"
+  ],
+  "properties": {
+    "idImpacto": {
+      "type": "integer"
+    },
+    "projeto": {
+      "type": "object",
+      "required": [
+        "idProjeto"
+      ],
+      "properties": {
+        "idProjeto": {
+          "type": "integer"
+        }
+      }
+    },
+    "beneficiario": {
+      "type": "object",
+      "required": [
+        "idBeneficiario"
+      ],
+      "properties": {
+        "idBeneficiario": {
+          "type": "integer"
+        }
+      }
+    },
+    "tipoImpacto": {
+      "type": "string",
+      "enum": [
+        "CAPACITACAO",
+        "DOACAO",
+        "ATENDIMENTO",
+        "EMPREGO",
+        "OUTRO"
+      ]
+    },
+    "descricao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dataRegistro": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

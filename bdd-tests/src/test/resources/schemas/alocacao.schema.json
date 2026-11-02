@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Alocacao de recurso",
+  "type": "object",
+  "required": [
+    "idAlocacao",
+    "projeto",
+    "valor",
+    "tipoRecurso"
+  ],
+  "properties": {
+    "idAlocacao": {
+      "type": "integer"
+    },
+    "projeto": {
+      "type": "object",
+      "required": [
+        "idProjeto"
+      ],
+      "properties": {
+        "idProjeto": {
+          "type": "integer"
+        }
+      }
+    },
+    "descricao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "valor": {
+      "type": "number"
+    },
+    "tipoRecurso": {
+      "type": "string",
+      "enum": [
+        "FINANCEIRO",
+        "MATERIAL",
+        "HUMANO",
+        "TECNOLOGICO"
+      ]
+    },
+    "dataAlocacao": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

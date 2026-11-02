@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pagina de logs de auditoria",
+  "type": "object",
+  "required": [
+    "content",
+    "totalElements",
+    "size",
+    "number"
+  ],
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/log"
+      }
+    },
+    "totalElements": {
+      "type": "integer"
+    },
+    "totalPages": {
+      "type": "integer"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "integer"
+    }
+  },
+  "definitions": {
+    "log": {
+      "title": "Log de auditoria",
+      "type": "object",
+      "required": [
+        "idLog",
+        "tabelaOrigem",
+        "operacao",
+        "dataLog"
+      ],
+      "properties": {
+        "idLog": {
+          "type": "integer"
+        },
+        "tabelaOrigem": {
+          "type": "string"
+        },
+        "operacao": {
+          "type": "string"
+        },
+        "idReferencia": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "descricao": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "usuario": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "dataLog": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Voluntario",
+  "type": "object",
+  "required": [
+    "idVoluntario",
+    "nome",
+    "cpf",
+    "email",
+    "statusVol"
+  ],
+  "properties": {
+    "idVoluntario": {
+      "type": "integer"
+    },
+    "nome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cpf": {
+      "type": "string",
+      "maxLength": 14
+    },
+    "email": {
+      "type": "string"
+    },
+    "especialidade": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "statusVol": {
+      "type": "string",
+      "enum": [
+        "ATIVO",
+        "INATIVO"
+      ]
+    },
+    "dataCadastro": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

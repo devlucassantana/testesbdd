@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Alerta ESG",
+  "type": "object",
+  "required": [
+    "idAlerta",
+    "projeto",
+    "tipoAlerta",
+    "mensagem",
+    "statusAlerta"
+  ],
+  "properties": {
+    "idAlerta": {
+      "type": "integer"
+    },
+    "projeto": {
+      "type": "object",
+      "required": [
+        "idProjeto"
+      ],
+      "properties": {
+        "idProjeto": {
+          "type": "integer"
+        }
+      }
+    },
+    "tipoAlerta": {
+      "type": "string",
+      "enum": [
+        "ORCAMENTO_CRITICO",
+        "NOVO_VOLUNTARIO",
+        "PROJETO_INICIADO",
+        "ORCAMENTO_ESTOURADO"
+      ]
+    },
+    "mensagem": {
+      "type": "string"
+    },
+    "statusAlerta": {
+      "type": "string",
+      "enum": [
+        "PENDENTE",
+        "LIDO",
+        "RESOLVIDO"
+      ]
+    },
+    "dataAlerta": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Erro de validacao (400)",
+  "type": "object",
+  "required": [
+    "status",
+    "error",
+    "campos",
+    "timestamp"
+  ],
+  "properties": {
+    "status": {
+      "type": "integer",
+      "enum": [
+        400
+      ]
+    },
+    "error": {
+      "type": "string"
+    },
+    "campos": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  }
+}
